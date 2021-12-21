@@ -1,0 +1,29 @@
+.dashboardContainer {
+  .MuiAppBar-positionStatic {
+    position: fixed;
+    top: 0;
+  }
+  .productList {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 70px 25px 25px 25px;
+  }
+  .rupee {
+    font-size: 0.875rem;
+    margin-right: 4px;
+    color: red;
+  }
+  .discountPrice {
+    color: red;
+    font-size: 1.5rem;
+  }
+  .actualPrice {
+    font-size: 0.75rem;
+    margin-left: 8px;
+    text-decoration: line-through;
+  }
+  .save {
+    font-size: 1rem;
+    margin-left: 20px;
+  }
+}

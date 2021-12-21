@@ -1,0 +1,75 @@
+body * {
+  box-sizing: border-box;
+}
+::-webkit-scrollbar {
+  height: rem(4);
+  width: rem(4);
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(#979797, 0.3);
+  border-radius: rem(10);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #999999;
+  border-radius: rem(10);
+}
+
+body {
+  font-family: Arial !important;
+  margin: 0 !important;
+}
+
+.flex {
+  display: flex;
+}
+.flex-space-around {
+  justify-content: space-around;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+.MuiAppBar-colorPrimary {
+  background: #0579ba !important;
+}
+.MuiButton-containedPrimary {
+  background: #0579ba !important;
+}
+.MuiFormControl-root {
+  margin: 10px 0 !important;
+}
+
+.MuiTypography-noWrap {
+  text-overflow: clip !important;
+  overflow: none !important;
+}
+
+@media (max-width: 400px) {
+  html {
+    font-size: 46.875%;
+  }
+}
+
+@media (max-width: 800px) {
+  html {
+    font-size: 60%;
+  }
+}
+@media (min-width: 800px) and (max-width: 1219px) {
+  html {
+    font-size: 78.125%;
+  }
+}
+
+@media (min-width: 1220px) and (max-width: 1439px) {
+  html {
+    font-size: 90%;
+  }
+}
+
+@media (min-width: 1440px) {
+  html {
+    font-size: 100%;
+  }
+}
