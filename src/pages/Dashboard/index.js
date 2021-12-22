@@ -5,15 +5,9 @@ import AppBarHeader from "../../components/AppBar";
 import ProductCard from "./Components/ProductCard";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import MuiAlert from "@material-ui/lab/Alert";
-import Snackbar from "@material-ui/core/Snackbar";
 
 // import {tshirts,shorts,shoes,pants,bag,snorkelingmask,camp} from '../../assets'
 import "./style.scss";
-
-function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
 
 function Dashboard(props) {
   const dispatch = useDispatch();
