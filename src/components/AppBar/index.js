@@ -126,7 +126,7 @@ export default function AppBarHeader({ productsData, logoutUser }) {
             <ShoppingCartIcon />
           </Badge>
         </IconButton>
-        <p>Cart</p>
+        <p onClick={() => goToPage("/cart")}>Cart</p>
       </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
