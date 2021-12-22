@@ -112,6 +112,7 @@ const cartReducer = (state = INITIAL_STATE, { type, payload }) => {
     }
 
     case `${ADD_TO_CART}`: {
+      console.log(payload, "............");
       return {
         ...state,
         products_in_cart: [...state.products_in_cart, { ...payload }],
