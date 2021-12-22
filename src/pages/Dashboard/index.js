@@ -19,12 +19,6 @@ function Dashboard(props) {
   const dispatch = useDispatch();
   const history = useHistory();
   const cartReducer = useSelector((state) => state.cartReducer);
-  const [snackOpen, setSnackOpen] = React.useState(false);
-  const [message, setMessage] = React.useState("");
-
-  const handleSnackClose = (event, reason) => {
-    setSnackOpen(false);
-  };
 
   const authenticationReducer = useSelector(
     (state) => state.authenticationReducer || {}
@@ -44,18 +38,6 @@ function Dashboard(props) {
 
   return (
     <div className="dashboardContainer">
-      <Snackbar
-        open={snackOpen}
-        autoHideDuration={3000}
-        onClose={handleSnackClose}
-      >
-        {message !== "" && (
-          <Alert onClose={handleSnackClose} severity={"failure"}>
-            {message}
-          </Alert>
-        )}
-      </Snackbar>
-
       <AppBarHeader
         history={history}
         productsData={cartReducer}
