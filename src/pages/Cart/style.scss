@@ -60,3 +60,15 @@
     }
   }
 }
+
+@media (max-width: 720px) {
+  .cartContainer {
+    .cartParent {
+      flex-direction: column;
+      .box-shadow {
+        max-width: inherit;
+        width: 100%;
+      }
+    }
+  }
+}
