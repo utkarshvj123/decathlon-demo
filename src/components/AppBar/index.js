@@ -120,13 +120,13 @@ export default function AppBarHeader({ productsData, logoutUser }) {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
+      <MenuItem onClick={() => goToPage("/cart")}>
         <IconButton aria-label="show 11 new notifications" color="inherit">
           <Badge badgeContent={totalItems} color="secondary">
             <ShoppingCartIcon />
           </Badge>
         </IconButton>
-        <p onClick={() => goToPage("/cart")}>Cart</p>
+        <p>Cart</p>
       </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
