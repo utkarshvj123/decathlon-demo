@@ -93,7 +93,9 @@ function Authentication(props) {
         <div className="heading">Welcome to DECATHLON</div>
       </Grid>
       <Grid item={true} xs={5} className="secondGrid">
-        <img alt="not found" src={decathlon} height={100} />
+        <div>
+          <img alt="not found" src={decathlon} className="img-wrapper" />
+        </div>
         <div className="container">
           <Fragment>
             <InputItem
