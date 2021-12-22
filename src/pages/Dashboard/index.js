@@ -5,6 +5,7 @@ import AppBarHeader from "../../components/AppBar";
 import ProductCard from "./Components/ProductCard";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
 
 // import {tshirts,shorts,shoes,pants,bag,snorkelingmask,camp} from '../../assets'
 import "./style.scss";
@@ -22,21 +23,32 @@ function Dashboard(props) {
     dispatch(fetchProductsList(dispatch));
   }, [dispatch]);
   const dispatchActionAccouringToReque = (type, product) => {
-    if (type === "logout") {
-      dispatch(logoutUser());
+    if (cartReducer.products_in_cart.some((prod) => prod._id === product._id)) {
+      toastMessage("error", "Product already in cart.");
     } else {
-      cartReducer.products_in_cart.some((prod) => prod._id === product._id) ||
-        dispatch(addProductsToCart(product));
+      toastMessage("success", `${product.name} added successfully.`);
+      dispatch(addProductsToCart(product));
     }
   };
 
+  const toastMessage = (toastType, message) => {
+    toast[toastType](message, {
+      position: "top-right",
+      autoClose: 1000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  };
   return (
     <div className="dashboardContainer">
       <AppBarHeader
         history={history}
         productsData={cartReducer}
         authenticationReducer={authenticationReducer}
-        logoutUser={() => dispatchActionAccouringToReque("logout")}
+        logoutUser={() => logoutUser()}
       />
       <div className="productList">
         {cartReducer.products_list.map((product) => {

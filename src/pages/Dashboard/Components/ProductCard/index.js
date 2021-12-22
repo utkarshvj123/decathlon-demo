@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
@@ -7,12 +7,6 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from "@material-ui/lab/Alert";
-
-function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
 
 const useStyles = makeStyles({
   root: {
@@ -34,41 +28,13 @@ const useStyles = makeStyles({
 
 export default function ProductCard({ product, addProductsToCart }) {
   const classes = useStyles();
-  const [snackOpen, setSnackOpen] = React.useState(false);
-  const [message, setMessage] = React.useState("");
-
-  const handleSnackClose = (event, reason) => {
-    setSnackOpen(false);
-  };
-
-  useEffect(() => {
-    if (message !== "") {
-      setSnackOpen(true);
-      setTimeout(() => {
-        setMessage(``);
-      }, 3500);
-    }
-  }, [message]);
 
   const addToCart = (product) => {
     addProductsToCart(product);
-    setSnackOpen(false);
-    setMessage(`${product.name} item added to cart successfully`);
   };
 
   return (
     <Card className={classes.root}>
-      <Snackbar
-        open={snackOpen}
-        autoHideDuration={3000}
-        onClose={handleSnackClose}
-      >
-        {message !== "" && (
-          <Alert onClose={handleSnackClose} severity={"success"}>
-            {message}
-          </Alert>
-        )}
-      </Snackbar>
       <CardActionArea>
         <CardMedia
           className={classes.media}
