@@ -1,9 +1,6 @@
 import React, { useEffect, Fragment, useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
-import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from "@material-ui/lab/Alert";
-
 import InputItem from "../../components/InputItem";
 import { loginUser } from "./actions";
 
@@ -12,20 +9,11 @@ import { users_list } from "../../utils/ExistingUsers";
 import "./style.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
-
-function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
+import { toast } from "react-toastify";
 
 function Authentication(props) {
   const [email, setEmail] = useState("");
   const [password, setPassord] = useState("");
-  const [snackOpen, setSnackOpen] = React.useState(false);
-  const [showMessage, setShowMessage] = useState({
-    success: true,
-    message: "User logged in successfully",
-    error: "",
-  });
   const dispatch = useDispatch();
   const authenticationReducer = useSelector(
     (state) => state?.authenticateReducer
@@ -55,40 +43,29 @@ function Authentication(props) {
         user.email === payload.email && user.password === payload.password
     );
     if (findIndex !== -1) {
-      setShowMessage({
-        success: "success",
-        message: "User logged in successfully",
-        error: "",
-      });
-      setSnackOpen(true);
-      dispatch(loginUser(payload));
+      toastMessage("success", `User logged in successfully.`);
+      setTimeout(() => {
+        dispatch(loginUser(payload));
+      }, 1000);
     } else {
-      setShowMessage({
-        success: "error",
-        message: `User doesn't exist`,
-        error: "Please enter correct email and password",
-      });
-      setSnackOpen(true);
+      toastMessage("error", "Please enter correct email and password.");
     }
   };
 
-  const handleSnackClose = (event, reason) => {
-    setSnackOpen(false);
+  const toastMessage = (toastType, message) => {
+    toast[toastType](message, {
+      position: "top-right",
+      autoClose: 1000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   };
 
   return (
     <div className="LoginContainer">
-      <Snackbar
-        open={snackOpen}
-        autoHideDuration={3000}
-        onClose={handleSnackClose}
-      >
-        {showMessage.message !== "" && (
-          <Alert onClose={handleSnackClose} severity={showMessage.success}>
-            {showMessage.message}
-          </Alert>
-        )}
-      </Snackbar>
       <Grid item={true} xs={7} className="firstGrid">
         <div className="heading">Welcome to DECATHLON</div>
       </Grid>
@@ -113,7 +90,7 @@ function Authentication(props) {
               // value={values.password}
               onChange={handleInputChange}
             />
-            <div className="error">{showMessage.error}</div>
+            {/* <div className="error">{showMessage.error}</div> */}
             <Button
               type="submit"
               variant="contained"

@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Button from "@material-ui/core/Button";
-import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from "@material-ui/lab/Alert";
 
 import {
   fetchProductsList,
@@ -20,15 +18,10 @@ import "./style.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 
-function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
-
 function Cart(props) {
   const [sum, setSum] = useState(0);
   const [openPopup, openDeletePopup] = useState(false);
   const [idToBeDeleted, setItemIdToBeDeleted] = useState({});
-  const [snackOpen, setSnackOpen] = React.useState(false);
   const [totalProducts, setTotalProducts] = useState(0);
   const cartReducer = useSelector((state) => state?.cartReducer);
   const authenticationReducer = useSelector(
@@ -43,8 +36,9 @@ function Cart(props) {
   useEffect(() => {
     let sum = 0;
     let total_products = 0;
-    cartReducer.products_in_cart &&
-      cartReducer.products_in_cart.map((product) => {
+    const cartProduct = [...cartReducer.products_in_cart];
+    cartProduct.length &&
+      cartProduct.map((product) => {
         sum = sum + product.discount_price * product.quantity;
         total_products = total_products + product.quantity;
       });
@@ -101,21 +95,8 @@ function Cart(props) {
     openDeletePopup(false);
   };
 
-  const handleSnackClose = (event, reason) => {
-    setSnackOpen(false);
-  };
-
   return (
     <div className="cartContainer">
-      <Snackbar
-        open={snackOpen}
-        autoHideDuration={3000}
-        onClose={handleSnackClose}
-      >
-        <Alert onClose={handleSnackClose} severity={"success"}>
-          Your order successful
-        </Alert>
-      </Snackbar>
       <AppBarHeader
         productsData={cartReducer}
         history={history}
