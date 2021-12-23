@@ -1,4 +1,4 @@
-import { LOGIN_USER, LOGOUT_USER } from "./actionType";
+import { LOGIN_USER, LOGOUT_USER, SPINNER } from "./actionType";
 
 export const loginUser = (payload) => {
   return {
@@ -14,5 +14,10 @@ export const loginUserFailed = (payload) => ({
 
 export const logoutUser = (payload) => ({
   type: `${LOGOUT_USER}`,
+  payload,
+});
+
+export const spinnerState = (payload) => ({
+  type: SPINNER,
   payload,
 });

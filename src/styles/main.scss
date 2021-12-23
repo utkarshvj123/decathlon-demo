@@ -19,6 +19,10 @@ body * {
 body {
   font-family: Arial !important;
   margin: 0 !important;
+  .spinner-class {
+    height: 100%;
+    width: 100%;
+  }
 }
 
 .flex {

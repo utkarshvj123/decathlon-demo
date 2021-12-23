@@ -10,7 +10,7 @@ import Menu from "@material-ui/core/Menu";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
@@ -58,6 +58,7 @@ export default function AppBarHeader({ productsData, logoutUser }) {
     (state) => state.authenticateReducer
   );
   const history = useHistory();
+  const dispatch = useDispatch();
   useEffect(() => {
     setTotalItems(
       productsData &&
@@ -89,7 +90,7 @@ export default function AppBarHeader({ productsData, logoutUser }) {
   const handleLogout = () => {
     setAnchorEl(null);
     handleMobileMenuClose();
-    logoutUser();
+    dispatch(logoutUser());
     history.push("/login");
   };
 
@@ -104,7 +105,7 @@ export default function AppBarHeader({ productsData, logoutUser }) {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      {/* <MenuItem onClick={handleMenuClose}>My account</MenuItem> */}
       <MenuItem onClick={handleLogout}>Logout</MenuItem>
     </Menu>
   );

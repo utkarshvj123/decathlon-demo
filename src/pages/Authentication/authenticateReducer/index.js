@@ -1,9 +1,10 @@
-import { LOGIN_USER, LOGOUT_USER } from "../actions/actionType";
+import { LOGIN_USER, LOGOUT_USER, SPINNER } from "../actions/actionType";
 
 const INITIAL_STATE = {
   user_details: {},
   message: "",
   logged_in: false,
+  spinnerEnabled: false,
 };
 
 const authenticateReducer = (state = INITIAL_STATE, { type, payload }) => {
@@ -29,7 +30,12 @@ const authenticateReducer = (state = INITIAL_STATE, { type, payload }) => {
         logged_in: false,
       };
     }
-
+    case SPINNER: {
+      return {
+        ...state,
+        spinnerEnabled: payload,
+      };
+    }
     default:
       return state;
   }

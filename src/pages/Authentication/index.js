@@ -2,7 +2,7 @@ import React, { useEffect, Fragment, useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import InputItem from "../../components/InputItem";
-import { loginUser } from "./actions";
+import { loginUser, spinnerState } from "./actions";
 
 import decathlon from "../../assets/decathlon.png";
 import { users_list } from "../../utils/ExistingUsers";
@@ -44,7 +44,9 @@ function Authentication(props) {
     );
     if (findIndex !== -1) {
       toastMessage("success", `User logged in successfully.`);
+      dispatch(spinnerState(true));
       setTimeout(() => {
+        dispatch(spinnerState(false));
         dispatch(loginUser(payload));
       }, 1000);
     } else {
